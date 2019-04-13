@@ -17,6 +17,7 @@ using Zpas.Persistence.Context;
 using Zpas.Infrastructure.Bootstrapping;
 using Zpas.Infrastructure.Services;
 using Zpas.Application.Delegations.Interfaces;
+using Zpas.Infrastructure.Settings;
 
 namespace Zpas.Api
 {
@@ -37,7 +38,7 @@ namespace Zpas.Api
                 .AddMvc()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            services.Configure<JwtSettings>(options => Configuration.GetSection("Jwt").Bind(options));
             services.AddCors();
 
             services.AddDbContext<ApplicationDbContext>(options => options

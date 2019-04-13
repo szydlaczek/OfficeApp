@@ -1,7 +1,4 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Zpas.Application.Delegations.Interfaces;
@@ -12,9 +9,11 @@ namespace Zpas.Application.Delegations.Users.Commands.SignIn
     public class SignInUserCommandHandler : IRequestHandler<SignInUserCommand, Response>
     {
         private readonly ISignInService _signInService;
-        public SignInUserCommandHandler(ISignInService signInService)
+        private readonly IJWTService _jWTService;
+        public SignInUserCommandHandler(ISignInService signInService, IJWTService jWTService)
         {
             _signInService = signInService;
+            _jWTService = jWTService;
         }
         public async Task<Response> Handle(SignInUserCommand request, CancellationToken cancellationToken)
         {
