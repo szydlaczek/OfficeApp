@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {connect} from 'react-redux';
 
 
-export default class SignInForm extends React.Component {
+class SignInFormC extends React.Component {
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +45,7 @@ export default class SignInForm extends React.Component {
                             required
                             id="standard-required"
                             label="Required"
-                            defaultValue=""
+                            defaultValue={this.props.user.userName}
                             style = {{width: 200}}
                             margin="normal"
                             name="userName"
@@ -57,7 +58,7 @@ export default class SignInForm extends React.Component {
                             label="Password"
                             style = {{width: 200}}
                             type="password"
-                            defaultValue=""
+                            defaultValue={this.props.user.password}
                             autoComplete="current-password"
                             margin="normal"
                             name="password"
@@ -75,3 +76,11 @@ export default class SignInForm extends React.Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        user : state.user
+    }
+}
+
+const SignInForm = connect(mapStateToProps)(SignInFormC)
+export default SignInForm;
