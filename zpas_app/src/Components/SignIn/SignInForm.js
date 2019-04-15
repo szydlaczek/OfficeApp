@@ -28,9 +28,12 @@ class SignInFormC extends React.Component {
         });
       }
       onChange =(e)=> {
-        this.setState({
+        let user;
+        user = {
+            ...this.props.user,
             [e.target.name]: e.target.value
-        });
+        };
+        this.props.signInUser(user);    
     }
 
     render() {
@@ -74,13 +77,21 @@ class SignInFormC extends React.Component {
 
             </form>
         );
+    } 
+
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        signInUser : user => dispatch({type : 'SignInUser', payload: user})
     }
 }
+
+
 const mapStateToProps = state => {
     return {
         user : state.user
     }
 }
 
-const SignInForm = connect(mapStateToProps)(SignInFormC)
+const SignInForm = connect(mapStateToProps, mapDispatchToProps)(SignInFormC)
 export default SignInForm;
