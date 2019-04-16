@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Zpas.Domain.Entities;
 
 namespace Zpas.Application.Delegations.Interfaces
 {
     public interface IJWTService
     {
-        string GenerateJWT(User user, IList<string> roles);        
+        string GenerateJWT(User user, IList<string> roles);
     }
 }

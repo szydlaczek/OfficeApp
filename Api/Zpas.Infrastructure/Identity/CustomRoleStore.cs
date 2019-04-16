@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Zpas.Domain.Entities;
@@ -14,10 +12,12 @@ namespace Zpas.Infrastructure.Identity
     public class CustomRoleStore : IRoleStore<Role>
     {
         private ApplicationDbContext _contextDB;
+
         public CustomRoleStore(ApplicationDbContext contextDB)
         {
             this._contextDB = contextDB;
         }
+
         public async Task<IdentityResult> CreateAsync(Role role, CancellationToken cancellationToken)
         {
             if (role == null)

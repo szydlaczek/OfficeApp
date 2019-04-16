@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Zpas.Domain.Entities;
@@ -17,18 +16,20 @@ namespace Zpas.Infrastructure.Identity
                                    IUserEmailStore<User>
     {
         private ApplicationDbContext _contextDB;
+
         public CustomUserStore(ApplicationDbContext contextDB)
         {
             this._contextDB = contextDB;
         }
+
         public Task<IdentityResult> CreateAsync(User user, CancellationToken cancellationToken)
         {
-
             _contextDB.Users.Add(user);
             _contextDB.SaveChanges();
 
             return Task.FromResult(IdentityResult.Success);
         }
+
         public Task<IdentityResult> UpdateAsync(User user, CancellationToken cancellationToken)
         {
             if (user == null)
@@ -57,6 +58,7 @@ namespace Zpas.Infrastructure.Identity
 
             return Task.FromResult(IdentityResult.Success);
         }
+
         public Task<User> FindByIdAsync(string userId, CancellationToken cancellationToken)
             => Task.FromResult(_contextDB.Users.Find(userId));
 
@@ -68,6 +70,7 @@ namespace Zpas.Infrastructure.Identity
 
         public Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
             => Task.FromResult(user.UserName);
+
         public Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken)
         {
             if (user == null)
@@ -75,7 +78,7 @@ namespace Zpas.Infrastructure.Identity
                 throw new ArgumentNullException("user");
             }
 
-            user.UserName=userName;
+            user.UserName = userName;
             _contextDB.SaveChanges();
 
             return Task.CompletedTask;
@@ -86,6 +89,7 @@ namespace Zpas.Infrastructure.Identity
 
         public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
             => Task.CompletedTask;
+
         public Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
             if (user == null)
@@ -101,12 +105,13 @@ namespace Zpas.Infrastructure.Identity
             var findRole = _contextDB.Roles.Where(r => r.Name == roleName).FirstOrDefault();
             if (findRole != null)
             {
-                _contextDB.UserRoles.Add(new UserRole {UserId=user.Id, RoleId=findRole.Id });
+                _contextDB.UserRoles.Add(new UserRole { UserId = user.Id, RoleId = findRole.Id });
                 _contextDB.SaveChanges();
             }
 
             return Task.CompletedTask;
         }
+
         public Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
             => Task.FromResult((IList<string>)user.UserRoles.Select(ur => ur.Role).Select(r => r.Name).ToList());
 
@@ -127,6 +132,7 @@ namespace Zpas.Infrastructure.Identity
                 .Select(ur => ur.User)
                 .ToList()));
         }
+
         public Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
             if (user == null)
@@ -143,6 +149,7 @@ namespace Zpas.Infrastructure.Identity
 
             return Task.CompletedTask;
         }
+
         public Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
         {
             if (user == null)
@@ -150,10 +157,11 @@ namespace Zpas.Infrastructure.Identity
                 throw new ArgumentNullException("user");
             }
 
-            user.PasswordHash=passwordHash;
+            user.PasswordHash = passwordHash;
 
             return Task.CompletedTask;
         }
+
         public Task<string> GetPasswordHashAsync(User user, CancellationToken cancellationToken)
             => Task.FromResult(user.PasswordHash);
 
@@ -168,6 +176,7 @@ namespace Zpas.Infrastructure.Identity
 
             return Task.FromResult(hasPassword);
         }
+
         public void Dispose()
         {
             if (_contextDB != null)
@@ -210,11 +219,11 @@ namespace Zpas.Infrastructure.Identity
         {
             throw new NotImplementedException();
         }
+
         public Task SetNormalizedEmailAsync(User user, string normalizedEmail, CancellationToken cancellationToken)
         {
-            user.Email=normalizedEmail;
+            user.Email = normalizedEmail;
             return Task.CompletedTask;
-
         }
     }
 }

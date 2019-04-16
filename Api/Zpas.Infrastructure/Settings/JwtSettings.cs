@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zpas.Infrastructure.Settings
+﻿namespace Zpas.Infrastructure.Settings
 {
     public class JwtSettings
     {

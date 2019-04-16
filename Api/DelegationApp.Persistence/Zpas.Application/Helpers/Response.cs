@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Zpas.Application.Exceptions;
 
 namespace Zpas.Application.Helpers
@@ -25,8 +23,8 @@ namespace Zpas.Application.Helpers
             _messages.Add(errorItem);
             return this;
         }
-
     }
+
     public class ErrorItem
     {
         public ErrorCodesEnum Code { get; set; }

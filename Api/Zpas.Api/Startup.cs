@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using System.Reflection;
+using Zpas.Application.Delegations.Interfaces;
 using Zpas.Application.Delegations.Users.Commands.SignIn;
-using Zpas.Persistence.Context;
 using Zpas.Infrastructure.Bootstrapping;
 using Zpas.Infrastructure.Services;
-using Zpas.Application.Delegations.Interfaces;
 using Zpas.Infrastructure.Settings;
+using Zpas.Persistence.Context;
 
 namespace Zpas.Api
 {
@@ -29,7 +23,7 @@ namespace Zpas.Api
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(SignInUserCommandHandler).GetTypeInfo().Assembly);
@@ -44,7 +38,7 @@ namespace Zpas.Api
             services.AddDbContext<ApplicationDbContext>(options => options
            .UseSqlServer(Configuration.GetConnectionString("ZpasConnection")));
         }
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -54,7 +48,7 @@ namespace Zpas.Api
             app.UseAuthentication();
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
-            app.UseStaticFiles();            
+            app.UseStaticFiles();
             app.UseCors(builder =>
                         builder.WithOrigins("http://localhost:3000")
                                .AllowAnyHeader()

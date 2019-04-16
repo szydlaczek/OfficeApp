@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Threading.Tasks;
 using Zpas.Application.Delegations.Interfaces;
 using Zpas.Application.Exceptions;
@@ -11,10 +10,12 @@ namespace Zpas.Infrastructure.Services
     public class SignInService : ISignInService
     {
         private readonly SignInManager<User> _signInManager;
+
         public SignInService(SignInManager<User> signInManager)
         {
             _signInManager = signInManager;
         }
+
         public async Task<Response> SignInUser(string userName, string password)
         {
             var result = await _signInManager.PasswordSignInAsync(userName, password, false, false);

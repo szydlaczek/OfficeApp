@@ -10,11 +10,13 @@ namespace Zpas.Application.Delegations.Users.Commands.SignIn
     {
         private readonly ISignInService _signInService;
         private readonly IJWTService _jWTService;
+
         public SignInUserCommandHandler(ISignInService signInService, IJWTService jWTService)
         {
             _signInService = signInService;
-            _jWTService = jWTService;
+            _jWTService = jWTService; 
         }
+
         public async Task<Response> Handle(SignInUserCommand request, CancellationToken cancellationToken)
         {
             var result = await _signInService.SignInUser(request.UserName, request.Password);
