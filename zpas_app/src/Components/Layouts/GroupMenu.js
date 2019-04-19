@@ -13,6 +13,7 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import { Link } from "react-router-dom";
 const styles = theme => ({
     root: {
       width: '100%',
@@ -26,7 +27,8 @@ const styles = theme => ({
   class GroupMenu extends React.Component {
     state = {
       open: true,
-      name: this.props.name
+      name: this.props.name,
+      submenus: this.props.submenus
     };
   
     handleClick = () => {
@@ -34,14 +36,9 @@ const styles = theme => ({
     };
   
     render() {
-      const { classes } = this.props;
-      console.log(this.props.submenus)
-      return (
-        // <List
-        //   component="nav"
-          
-        //   className={classes.root}
-        // >   
+      const { classes } = this.props; 
+      console.log(this.props.location);     
+      return (          
         <Fragment>     
             <ListItem button onClick={this.handleClick}>
                 <ListItemIcon>
@@ -52,16 +49,16 @@ const styles = theme => ({
             </ListItem>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                <ListItem button className={classes.nested}>
-                    <ListItemIcon>
-                    <StarBorder />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Users" />
-                </ListItem>
+                  {this.state.submenus.map((submenu)=>{
+                    return <Fragment key={submenu.id}>
+                              <ListItem  button className={classes.nested} component={Link} to={submenu.url} >                          
+                                <ListItemText inset primary={submenu.name} />
+                              </ListItem>
+                            </Fragment>
+                  })}                  
                 </List>
             </Collapse> 
-        </Fragment>           
-        
+        </Fragment>       
       );
     }
   }

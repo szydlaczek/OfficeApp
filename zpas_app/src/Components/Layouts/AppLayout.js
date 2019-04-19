@@ -17,7 +17,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './Menu';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Users from './../Administrator/Users'
-import NestedMenu from './NestedMenu';
+import Menu from './Menu';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -161,7 +161,7 @@ class AppLayout extends React.Component {
             </IconButton>
           </div>
           <Divider />
-            <NestedMenu/>
+            <Menu/>
           <Divider />
           
         </Drawer>
