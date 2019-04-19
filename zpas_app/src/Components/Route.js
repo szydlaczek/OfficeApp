@@ -12,10 +12,9 @@ export default class Router extends React.Component {
           <Provider store={store}>
             <BrowserRouter>
               <Switch>
-                  <Route path="/Administrator" component={Administrator}>
-                      <Route path="Users" components={{main: Users}}></Route>
-                  </Route>
-                  <Route path='/SignIn' component = {SignIn}/>
+                  <Route path="/Administrator" component={Administrator}/>
+                      
+                  
                   
               </Switch>
             </BrowserRouter> 

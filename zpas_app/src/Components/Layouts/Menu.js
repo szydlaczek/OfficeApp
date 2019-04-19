@@ -9,14 +9,16 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-
+import {MenuList, MenuItem} from '@material-ui/core'
 export const mainListItems = (
   <div>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Users" />
+      <ListItemLink href="/Administrator/Users">
+        <ListItemText primary="Users" />
+      </ListItemLink>
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -28,6 +30,7 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
+      
       <ListItemText primary="Customers" />
     </ListItem>
     <ListItem button>
@@ -41,8 +44,14 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItem>
+    </ListItem> */}
+    <MenuList>
+      <MenuItem>
+        Users
+      </MenuItem>
+    </MenuList>
   </div>
+
 );
 
 export const secondaryListItems = (

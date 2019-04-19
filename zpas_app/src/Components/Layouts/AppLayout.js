@@ -15,8 +15,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './Menu';
-
-
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Users from './../Administrator/Users'
+import NestedMenu from './NestedMenu';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -160,20 +161,13 @@ class AppLayout extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+            <NestedMenu/>
           <Divider />
-          <List>{secondaryListItems}</List>
+          
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
-          </Typography>
-          
-          <Typography variant="h4" gutterBottom component="h2">
-            Products
-          </Typography>
-          
+           <Route path="/Administrator/Users" component={Users}/>          
         </main>
       </div>
     );
