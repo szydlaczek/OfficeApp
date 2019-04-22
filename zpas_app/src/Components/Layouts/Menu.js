@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -13,8 +13,10 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-import GroupMenu from "./GroupMenu";
+import { browserHistory } from 'react-router';
 import {Menus} from './../../store/MenuStore';
+import { Link } from "react-router-dom";
+
 
 const styles = theme => ({
     root: {
@@ -28,16 +30,31 @@ const styles = theme => ({
   })
   class Menu extends React.Component {
     state = {
-      open: true,
+      currentMenu: window.location.pathname.split('/')[1].toLowerCase(),
+      
     };
     
-    handleClick = () => {
-      this.setState(state => ({ open: !state.open }));
+    handleClick = (menu) => {
+      console.log(this.state.currentMenu);
+      this.setState({currentMenu: menu.toLowerCase()})      
     };
-  
+    
+    checkIsSelected = (menu,submenu) => {
+       const url = window.location.pathname.toLowerCase();
+       console.log(url)
+       if (url.includes(menu.toLowerCase()) && url.includes(submenu.toLowerCase()))
+             
+          return true;
+       
+          
+      else
+        return false;
+    }
+
     render() {
       const { classes } = this.props;
-      const menus = Menus; 
+      const menus = Menus;
+
       return (
         <List
           component="nav"          
@@ -45,7 +62,29 @@ const styles = theme => ({
         > 
           {
               menus.map((menu)=>{
-                   return <GroupMenu key={menu.id} name={menu.name} submenus={menu.SubMenus}/>
+                  
+                  return (
+                    <Fragment>     
+                      <ListItem button onClick={()=>this.handleClick(menu.name)}>
+                          <ListItemIcon>
+                          <InboxIcon />
+                          </ListItemIcon>
+                          <ListItemText inset primary={menu.displayName} />
+                          {this.state.currentMenu==menu.name ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      <Collapse in={this.state.currentMenu==menu.name} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            {menu.subMenus.map((submenu)=>{
+                              return <Fragment key={submenu.id}>
+                                        <ListItem  button className={classes.nested} component={Link} to={submenu.url} selected={this.checkIsSelected(menu.name, submenu.name)}>                          
+                                          <ListItemText inset primary={submenu.displayName} />
+                                        </ListItem>
+                                      </Fragment>
+                            })}                  
+                          </List>
+                      </Collapse> 
+                    </Fragment>
+                  );
               })
           }       
           

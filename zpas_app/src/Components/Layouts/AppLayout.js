@@ -101,7 +101,7 @@ class AppLayout extends React.Component {
   state = {
     open: true,
   };
-
+  
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -161,13 +161,12 @@ class AppLayout extends React.Component {
             </IconButton>
           </div>
           <Divider />
-            <Menu/>
-          <Divider />
-          
+            <Menu url={window.location.pathname}/>
+          <Divider />          
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-           <Route path="/Administrator/Users" component={Users}/>          
+           <Route exact path="/Administrator/Users" component={Users}/>          
         </main>
       </div>
     );

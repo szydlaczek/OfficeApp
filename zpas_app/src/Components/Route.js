@@ -4,19 +4,15 @@ import SignIn from './SignIn/SignIn'
 import App from './../App';
 import {Provider} from 'react-redux';
 import store from '../store/store';
-import Users from './Administrator/Users'
+import AppLayout from './Layouts/AppLayout';
 import Administrator from './Administrator/Layout/Administrator'
 export default class Router extends React.Component {
     render() {
         return (
           <Provider store={store}>
-            <BrowserRouter>
-              <Switch>
-                  <Route path="/Administrator" component={Administrator}/>
-                      
-                  
-                  
-              </Switch>
+            <BrowserRouter>              
+                <Route component={AppLayout} path="/">                  
+                </Route>              
             </BrowserRouter> 
           </Provider>
         ); 

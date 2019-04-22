@@ -1,33 +1,39 @@
 export  const Menus = [
     {
         id: 1,
-        name : "Administrator",
-        SubMenus: [
+        name : "administrator",
+        displayName: "Menu Administratora",
+        subMenus: [
             {
                 id: 1,
-                name: "Users",
-                url: "/Administrator/Users"
+                name: "users",
+                displayName: "All users",
+                url: "/administrator/users"
             },
             {
                 id: 2,
-                name: "Roles",
-                url: "/Administrator/Roles"
+                name: "roles",
+                displayName: "All roles",
+                url: "/administrator/roles"
             }
         ]
     },
     {
         id: 2,
-        name : "Kadry",
-        SubMenus: [
+        name : "kadry",
+        displayName: "Menu kadr",
+        subMenus: [
             {
                 id: 1,
-                name: "Users",
-                url: "/Administrator/Users"
+                name: "wprowadzone",
+                displayName: "Delegacje wprowadzone",
+                url: "/kadry/wprowadzone"
             },
             {
                 id: 2,
-                name: "Roles",
-                url: "/Administrator/Roles"
+                name: "niewprowadzon",
+                displayName: "Delegacje niewprowadzone",
+                url: "/kadry/niewprowadzone"
             }
         ]
     },

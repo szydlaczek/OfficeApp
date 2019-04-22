@@ -1,17 +1,16 @@
-import React, { Component, Fragment} from 'react';
-import AppLayout  from '../../Layouts/AppLayout'
+// import React, { Component, Fragment} from 'react';
+// import AppLayout  from '../../Layouts/AppLayout'
 
-class Administrator extends Component {  
+// class Administrator extends Component {  
 
-  render() {   
+//   render() {   
     
-    return (
-      <Fragment >
-        <AppLayout ></AppLayout>
-      </Fragment>
-    );
-  }
-    
-}
+//     return (
+//       <Fragment >
+//         <AppLayout ></AppLayout>
+//       </Fragment>
+//     );
+//   }    
+// }
 
-export default Administrator;
+// export default Administrator;
