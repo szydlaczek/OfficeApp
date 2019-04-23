@@ -28,6 +28,7 @@ namespace Zpas.Api
         {
             services.AddMediatR(typeof(SignInUserCommandHandler).GetTypeInfo().Assembly);
             services.AddScoped<ISignInService, SignInService>();
+            services.AddScoped<IJWTService, JWTService>();
             services.AddIdentity(Configuration)
                 .AddMvc()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

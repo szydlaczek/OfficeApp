@@ -11,29 +11,45 @@ class SignInFormC extends React.Component {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state= {
-            userName:'dd',
-            password:'dd'
+            user : {
+                password: '',
+                userName: ''
+            }
         };
       }
       handleSubmit(event) {
         event.preventDefault();
         
         
-        fetch('http://localhost:62522/api/account/signin', {
+        fetch('http://localhost:54013/api/account/signin', {
           method: 'POST',
-          body: JSON.stringify(this.state),
+          body: JSON.stringify(this.state.user),
           headers: {
             'Content-Type': 'application/json'
         }
-        });
+        }).then(response => {
+            
+            const responseMessage = {
+                response : response.json().then(r=> {return r}),
+                status: response.status
+            }
+                           
+            return responseMessage
+        })
+        .then(res=>console.log(res))
+        .catch((er) => {
+            console.log("error");
+            console.log(er);
+        })
       }
       onChange =(e)=> {
         let user;
         user = {
-            ...this.props.user,
+            ...this.state.user,
             [e.target.name]: e.target.value
         };
-        this.props.signInUser(user);    
+        console.log()
+        this.setState({user: user});    
     }
 
     render() {

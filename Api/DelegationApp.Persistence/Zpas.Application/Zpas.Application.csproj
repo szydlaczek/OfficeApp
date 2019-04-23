@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\Zpas.Persistence\Zpas.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Delegations\Dtos\" />
+  </ItemGroup>
+
 </Project>

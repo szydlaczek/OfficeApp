@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using Zpas.Application.Delegations.Users.Commands.SignIn;
 
@@ -19,7 +20,9 @@ namespace Zpas.Api.Areas.Account.Controllers
         public async Task<IActionResult> SignIn([FromBody] SignInUserCommand command)
         {
             var response = await _mediator.Send(command);
-            return Ok(response);
+            if (response.Errors.Any())
+                return BadRequest(response.Errors);
+            return Ok(response.Result);
         }
     }
 }
