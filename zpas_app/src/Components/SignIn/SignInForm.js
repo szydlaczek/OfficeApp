@@ -7,49 +7,54 @@ import {connect} from 'react-redux';
 
 
 class SignInFormC extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state= {
-            user : {
+            user: {
+                userName: '',
                 password: '',
-                userName: ''
-            }
+            },
+            
+            submitted: false
         };
       }
       handleSubmit(event) {
-        event.preventDefault();
-        
-        
-        fetch('http://localhost:54013/api/account/signin', {
-          method: 'POST',
-          body: JSON.stringify(this.state.user),
-          headers: {
-            'Content-Type': 'application/json'
-        }
-        }).then(response => {
-            
-            const responseMessage = {
-                response : response.json().then(r=> {return r}),
-                status: response.status
-            }
-                           
-            return responseMessage
-        })
-        .then(res=>console.log(res))
-        .catch((er) => {
-            console.log("error");
-            console.log(er);
-        })
-      }
+         event.preventDefault();
+         fetch('http://localhost:54013/api/account/signin', {
+                   method: 'POST',
+                   body: JSON.stringify(this.state.user),
+                   headers: {
+                     'Content-Type': 'application/json'
+                 }
+                 }).then(response=> 
+                     {    console.log(response);
+                         localStorage.setItem('user', response.data.token)});
+         }
+    //    return fetch('http://localhost:54013/api/account/signin', {
+    //       method: 'POST',
+    //       body: JSON.stringify(this.state.user),
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //     }
+    //     }).then(response=> {
+    //         console.log(response.json())
+    //             return response.json()
+    //     })
+    //     .then(res=>console.log(res))
+    //     .catch((er) => {
+    //         console.log("error");
+    //         console.log(er);
+    //     })
+      
       onChange =(e)=> {
-        let user;
-        user = {
-            ...this.state.user,
-            [e.target.name]: e.target.value
-        };
-        console.log()
-        this.setState({user: user});    
+          const user = {
+              ...this.state.user,
+              [e.target.name]: e.target.value
+          }
+        this.setState({
+            user: user
+        })   
     }
 
     render() {
@@ -64,7 +69,7 @@ class SignInFormC extends React.Component {
                             required
                             id="standard-required"
                             label="Required"
-                            defaultValue={this.props.user.userName}
+                            defaultValue={this.state.user.userName}
                             style = {{width: 200}}
                             margin="normal"
                             name="userName"
@@ -77,7 +82,7 @@ class SignInFormC extends React.Component {
                             label="Password"
                             style = {{width: 200}}
                             type="password"
-                            defaultValue={this.props.user.password}
+                            defaultValue={this.state.user.password}
                             autoComplete="current-password"
                             margin="normal"
                             name="password"

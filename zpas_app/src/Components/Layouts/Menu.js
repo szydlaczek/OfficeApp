@@ -43,10 +43,7 @@ const styles = theme => ({
        const url = window.location.pathname.toLowerCase();
        console.log(url)
        if (url.includes(menu.toLowerCase()) && url.includes(submenu.toLowerCase()))
-             
           return true;
-       
-          
       else
         return false;
     }

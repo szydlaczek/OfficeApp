@@ -5,7 +5,7 @@ class Users extends Component {
     
     return (
       <Fragment >
-                 <div>Users</div>
+        <div>Users</div>
       </Fragment>
     );
   }
