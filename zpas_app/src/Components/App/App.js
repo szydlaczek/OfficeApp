@@ -1,7 +1,7 @@
 import React, { Component, Fragment} from 'react';
 
 import './App.css';
-import AppLayout  from './Components/Layouts/AppLayout'
+import AppLayout  from '../Layouts/AppLayout'
 
 class App extends Component { 
   
