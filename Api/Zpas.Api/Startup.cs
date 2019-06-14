@@ -51,7 +51,7 @@ namespace Zpas.Api
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors(builder =>
-                        builder.WithOrigins("http://localhost:3000")
+                        builder.AllowAnyOrigin()
                                .AllowAnyHeader()
                                .AllowAnyMethod());
             app.UseMvc();

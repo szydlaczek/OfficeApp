@@ -1,14 +1,28 @@
 import React from 'react'
+import AuthService from './../../Services/AuthService'
 import { Form, Layout, message, Icon, Row, Col, Input, Button, Checkbox } from 'antd';
 class LoginForm extends React.Component {
+    constructor() {
+        super();
+        this.Auth = new AuthService();
+    }
+    
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
           }
-
-          message.error('Bad user name');
+          this.Auth.login(values.username, values.password)
+          .then(res =>{
+              console.log(res);
+            this.props.history.replace('/');
+         })
+         .catch(err =>{
+             console.log(err);
+            message.error('err');
+         })
+          
         });
       };
 
