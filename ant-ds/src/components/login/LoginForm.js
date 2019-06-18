@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthService from './../../Services/AuthService'
-import { Form, Layout, message, Icon, Row, Col, Input, Button, Checkbox } from 'antd';
+import { Form, Layout, message, Icon, Row, Col, Input, Button } from 'antd';
 class LoginForm extends React.Component {
     constructor() {
         super();
