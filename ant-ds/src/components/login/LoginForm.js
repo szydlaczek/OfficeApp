@@ -1,29 +1,25 @@
 import React from 'react'
 import AuthService from './../../Services/AuthService'
+import {connect} from 'react-redux'
+
 import { Form, Layout, message, Icon, Row, Col, Input, Button } from 'antd';
+import * as actions from './../../actions/login'
+import { thisExpression } from '@babel/types';
 class LoginForm extends React.Component {
-    constructor() {
-        super();
-        this.Auth = new AuthService();
-    }
+    
     
     handleSubmit = e => {
         e.preventDefault();
+        
+        
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
           }
-          this.Auth.login(values.username, values.password)
-          .then(res =>{
-              console.log(res);
-            this.props.history.replace('/');
-         })
-         .catch(err =>{
-             console.log(err);
-            message.error('err');
-         })
+          this.props.getData(values);
           
         });
+
       };
 
     render() {
@@ -31,12 +27,13 @@ class LoginForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Content style={{ margin: '0 50px' }}>
+                <div>{this.props.loginReducer.errorMessage.toString()}</div>
                 <Row type="flex" justify="center" align='middle' style={{height: '90vh'}}>
                     <Col>
                     <div style = {{maxWidth: 380, padding: 50, background: "#fff"}}>
                         <Form onSubmit={this.handleSubmit} >
                             <Form.Item>
-                                {getFieldDecorator('username', {
+                                {getFieldDecorator('userName', {
                                 rules: [{ required: true, message: 'Podaj nazwę użytkownika!' }],
                                 })(
                                 <Input
@@ -74,5 +71,17 @@ class LoginForm extends React.Component {
         )
     }
 }
-const WrappedLoginForm = Form.create({ name: 'normal_login' })(LoginForm);
+
+const mapStateToProps = (state) => {
+    return state;
+  };
+
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      getData: (data) => dispatch(actions.getData(data))
+    }
+  };
+
+const WrappedLoginForm = connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'normal_login' })(LoginForm));
+
 export default WrappedLoginForm;
