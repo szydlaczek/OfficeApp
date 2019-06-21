@@ -6,14 +6,14 @@ const initialState = {
 
 export const rootReducer = (state= initialState,  action)=> {
     switch(action.type) {
-        case actions.GET_DATA_REQUESTED:
+        case actions.REQUEST_STARTED:
             return { ...state, isLoading: true };
         
-            case actions.END_DATA_REQUESTED:
-                    return { ...state, isLoading: false};    
+            case actions.REQUEST_ENDED:
+                   
+                    return { ...state, isLoading: false};  
 
-        case actions.GET_DATA_FAILED:
-            return { ...state, isLoading: false, isError: true } 
+        
             
 
         default: 

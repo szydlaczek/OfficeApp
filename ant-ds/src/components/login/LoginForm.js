@@ -1,10 +1,9 @@
 import React from 'react'
-import AuthService from './../../Services/AuthService'
 import {connect} from 'react-redux'
 
 import { Form, Layout, message, Icon, Row, Col, Input, Button } from 'antd';
-import * as actions from './../../actions/login'
-import { thisExpression } from '@babel/types';
+import signIn from './../../actions/signIn'
+
 class LoginForm extends React.Component {
     
     
@@ -27,7 +26,7 @@ class LoginForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Content style={{ margin: '0 50px' }}>
-                <div>{this.props.loginReducer.errorMessage.toString()}</div>
+                
                 <Row type="flex" justify="center" align='middle' style={{height: '90vh'}}>
                     <Col>
                     <div style = {{maxWidth: 380, padding: 50, background: "#fff"}}>
@@ -54,7 +53,7 @@ class LoginForm extends React.Component {
                                 )}
                             </Form.Item>
                             <Form.Item>                                
-                                <Button type="primary" htmlType="submit" className="login-form-button">
+                                <Button type="primary" htmlType="submit" className="login-form-button" loading={this.props.rootReducer.isLoading}>
                                     Log in
                                 </Button>                                
                             </Form.Item>
@@ -78,7 +77,7 @@ const mapStateToProps = (state) => {
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      getData: (data) => dispatch(actions.getData(data))
+      getData: (data) => dispatch(signIn(data))
     }
   };
 

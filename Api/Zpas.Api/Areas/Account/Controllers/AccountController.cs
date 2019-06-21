@@ -20,8 +20,8 @@ namespace Zpas.Api.Areas.Account.Controllers
         public async Task<IActionResult> SignIn([FromBody] SignInUserCommand command)
         {
             var response = await _mediator.Send(command);
-            if (response.Errors.Any())
-                return BadRequest(response.Errors);
+            if (response.Error!=null)
+                return BadRequest(response.Error);
             return Ok(response.Result);
         }
     }

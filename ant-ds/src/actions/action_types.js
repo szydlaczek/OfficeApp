@@ -1,33 +1,23 @@
-export const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';
+export const REQUEST_STARTED = 'REQUEST_STARTED';
+export const REQUEST_ENDED = 'REQUEST_ENDED';
 export const END_DATA_REQUESTED = "END_DATA_REQUESTED";
 export const GET_DATA_DONE = 'GET_DATA_DONE';
 export const GET_DATA_FAILED = 'GET_DATA_FAILED';
 export const USER_SIGNIN_SUCCESS = 'USER_SIGNIN_SUCCESS';
 export const USER_SIGNIN_FAILED = 'USER_SIGNIN_FAILED';
 
-export function getDataRequested() {
+export function requestStarted() {
     return {
-      type: GET_DATA_REQUESTED
+      type: REQUEST_STARTED
     };
   }
-
-  export function getDataDone(data) {
+  
+  export function requestEnded() {
     return {
-      type: GET_DATA_DONE,
-      payload: data
-    };
-  }
-  export function endRequest() {
-    return {
-        type: END_DATA_REQUESTED
+        type: REQUEST_ENDED
     }
   }
-  export function getDataFailed(error) {
-    return {
-      type: GET_DATA_FAILED,
-      payload: error
-    };
-  }
+  
 
   export function signInSuccess(user) {
     return {
@@ -36,10 +26,10 @@ export function getDataRequested() {
     };
   }
 
-  export function signInFailed(message) {
+  export function signInFailed(error) {
     return {
       type: USER_SIGNIN_FAILED,
-      payload: message
+      payload: error
     };
   }
 

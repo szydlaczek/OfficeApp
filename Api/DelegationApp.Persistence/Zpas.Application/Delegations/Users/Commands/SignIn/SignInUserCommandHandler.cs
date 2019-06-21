@@ -27,7 +27,7 @@ namespace Zpas.Application.Delegations.Users.Commands.SignIn
         {
             var result = await _signInService.SignInUser(request.UserName, request.Password);
 
-            if (result.Errors.Any())
+            if (result.Error!=null)
                 return result;
 
             var user = await _context.Users.Include(r => r.UserRoles).ThenInclude(r => r.Role).FirstOrDefaultAsync();

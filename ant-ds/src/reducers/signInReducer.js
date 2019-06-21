@@ -1,8 +1,8 @@
-import * as actions from './../actions/action_types';
+import * as actions from '../actions/action_types';
 const initialState = {
     errorMessage : ""
 }
-export const loginReducer = (state = initialState ,  action)=> {
+export const signInReducer = (state = initialState ,  action)=> {
     switch(action.type) {        
         case actions.USER_SIGNIN_SUCCESS:            
             return { ...state, loggedIn: true, user: action.payload };

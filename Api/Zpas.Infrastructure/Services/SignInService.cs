@@ -21,7 +21,7 @@ namespace Zpas.Infrastructure.Services
             var result = await _signInManager.PasswordSignInAsync(userName, password, false, false);
             if (!result.Succeeded)
             {
-                var response = new Response().AddError(new ErrorItem
+                var response = new Response(new ErrorItem
                 {
                     Code = ErrorCodesEnum.BasUserNameOrPassword,
                     Description = "Złe hasło lub nazwa użytkownika"

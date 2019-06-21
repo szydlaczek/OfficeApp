@@ -6,23 +6,22 @@ namespace Zpas.Application.Helpers
 {
     public class Response
     {
-        private readonly IList<ErrorItem> _messages = new List<ErrorItem>();
+        public ErrorItem Error { get; }
 
-        public IEnumerable<ErrorItem> Errors { get; }
+        
         public object Result { get; }
 
-        public Response() => Errors = new ReadOnlyCollection<ErrorItem>(_messages);
+        public Response() {}
 
-        public Response(object result) : this()
+        public Response(object result) 
         {
-            Result = result;
+            if (result is ErrorItem)
+                Error = (ErrorItem)result;
+            else
+                Result = result;
         }
 
-        public Response AddError(ErrorItem errorItem)
-        {
-            _messages.Add(errorItem);
-            return this;
-        }
+        
     }
 
     public class ErrorItem
