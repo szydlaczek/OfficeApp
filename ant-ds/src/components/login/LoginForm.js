@@ -15,14 +15,18 @@ class LoginForm extends React.Component {
           if (!err) {
             console.log('Received values of form: ', values);
           }
-          this.props.getData(values);
+          this.props.getData(values, this.callBack);
           
         });
 
       };
+    
+    callBack = () => {
+        message.error('This is an error message');
+    }  
 
     render() {
-        const { Header, Content, Footer } = Layout;
+        const { Content } = Layout;
         const { getFieldDecorator } = this.props.form;
         return (
             <Content style={{ margin: '0 50px' }}>
@@ -72,12 +76,12 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return state;
+    return  state;
   };
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      getData: (data) => dispatch(signIn(data))
+      getData: (data, callBack) => dispatch(signIn(data, callBack))
     }
   };
 

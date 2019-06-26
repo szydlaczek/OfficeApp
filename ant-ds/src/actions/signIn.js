@@ -1,7 +1,7 @@
 
 import * as action_types from './action_types'
-
- const signIn = (userData) => async dispatch => {  
+import {history} from './../helpers/_history'
+ const signIn = (userData, callback) => async dispatch => {  
          
       
       dispatch(action_types.requestStarted());
@@ -18,12 +18,15 @@ import * as action_types from './action_types'
             const user = await signInResponse.json();
             dispatch(action_types.requestEnded())
             dispatch(action_types.signInSuccess(user));
+            history.push('/app');
+
           }
           if (signInResponse.status ===400)
           {
             dispatch(action_types.requestEnded())
             const error = await signInResponse.json();
             dispatch(action_types.signInFailed(error))
+            callback();
           }
           
       }
